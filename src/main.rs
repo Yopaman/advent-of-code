@@ -1,0 +1,7 @@
+mod day1_1;
+mod day1_2;
+mod inputs;
+
+fn main() {
+    day1_2::run()
+}
