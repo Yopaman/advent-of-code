@@ -1,7 +1,7 @@
-mod day1_1;
-mod day1_2;
+mod day1;
+mod day2;
 mod inputs;
 
 fn main() {
-    day1_2::run()
+    day2::part2()
 }
