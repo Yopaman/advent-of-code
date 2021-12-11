@@ -1,6 +1,6 @@
 # Advent Of Code 2021
 
-My implementation of aoc 2021 in Rust. I'm currently learning th languages so some of my solution are probably uneffective. 
+My implementation of aoc 2021 in Rust. I'm currently learning the language so some of my solutions are probably uneffective. 
 
 ## Usage
 
