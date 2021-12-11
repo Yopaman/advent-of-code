@@ -18,6 +18,7 @@ pub fn part1() {
     println!("{}", hor * depth);
 }
 
+#[allow(dead_code)]
 pub fn part2() {
     let lines = inputs::read_lines("./src/inputs/day2.txt");
     let mut depth: i32 = 0;
