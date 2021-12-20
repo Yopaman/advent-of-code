@@ -38,6 +38,7 @@ fn most_common_bit(lines: &Vec<String>, i: usize) -> u32 {
     if nbr_ones >= nbr_zeros {1} else {0}
 }
 
+#[allow(dead_code)]
 pub fn part2() {
     let lines = inputs::read_lines("./src/inputs/day3.txt");
     
