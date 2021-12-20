@@ -44,6 +44,7 @@ fn calculate_score(card: &Vec<Vec<BingoNumber>>, win_number: u32) -> u32 {
     })*win_number
 }
 
+#[allow(dead_code)]
 pub fn part1() {
     let lines = inputs::read_lines("./src/inputs/day4.txt");
     let (numbers, mut bingo_cards) = parse_inputs(lines);
@@ -59,4 +60,29 @@ pub fn part1() {
             break;
         } 
     }
+}
+
+pub fn part2() {
+    let lines = inputs::read_lines("./src/inputs/day4.txt");
+    let (numbers, mut bingo_cards) = parse_inputs(lines);
+    let mut last_score: u32 = 0;
+    for n in numbers {
+        bingo_cards = bingo_cards.iter().map(|card| {
+            mark_number(card,n)
+        }).collect();
+
+        let winner = bingo_cards.iter().find(|card| {
+            is_winner(card)
+        });
+
+        if let Some(card) = winner {
+            let score = calculate_score(card, n);
+            if score != 0 {last_score = score}
+        } 
+
+        bingo_cards = bingo_cards.into_iter().filter(|card| {
+            !is_winner(card)
+        }).collect();
+    } 
+    println!("Last score : {}", last_score);
 }
