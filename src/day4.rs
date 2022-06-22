@@ -62,6 +62,7 @@ pub fn part1() {
     }
 }
 
+#[allow(dead_code)]
 pub fn part2() {
     let lines = inputs::read_lines("./src/inputs/day4.txt");
     let (numbers, mut bingo_cards) = parse_inputs(lines);
