@@ -1,4 +1,6 @@
 use crate::inputs;
+use std::cmp::min;
+use std::cmp::max;
 use itertools::Itertools;
 
 struct Line {
@@ -15,6 +17,10 @@ impl Line {
 
     fn is_horizontal(&self) -> bool {
         self.y1 == self.y2
+    }
+
+    fn is_diagonal(&self) -> bool {
+        self.x1 != self.x2 && self.y1 != self.y2
     }
 }
 
@@ -49,6 +55,41 @@ fn get_all_points(lines: Vec<Line>) -> Vec<(i32, i32)> {
                 l.y2 ..= l.y1
             };
             range.for_each(|y| points_vec.push((l.x1, y)));
+        } else if l.is_diagonal() {
+            if l.x1 <= l.x2 && l.y1 <= l.y2 {
+                let mut x = l.x1;
+                let mut y = l.y1;
+                while x <= l.x2 && y <= l.y2 {
+                    points_vec.push((x, y));
+                    x += 1;
+                    y += 1;
+                }
+            } else if l.x1 <= l.x2 && l.y1 >= l.y2 {
+                let mut x = l.x1;
+                let mut y = l.y1;
+                while x <= l.x2 && y >= l.y2 {
+                    points_vec.push((x, y));
+                    x += 1;
+                    y -= 1;
+                }
+            } else if l.x1 >= l.x2 && l.y1 <= l.y2 {
+                let mut x = l.x1;
+                let mut y = l.y1;
+                while x >= l.x2 && y <= l.y2 {
+                    points_vec.push((x, y));
+                    x -= 1;
+                    y += 1;
+                }
+            } else if l.x1 >= l.x2 && l.y1 >= l.y2 {
+                let mut x = l.x1;
+                let mut y = l.y1;
+                while x >= l.x2 && y >= l.y2 {
+                    points_vec.push((x, y));
+                    x -= 1;
+                    y -= 1;
+                }
+            }
+            
         }
     });
     points_vec
