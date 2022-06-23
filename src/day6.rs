@@ -7,13 +7,12 @@ fn parse_inputs() -> Vec<i32> {
 
 fn simulate(input: Vec<i32>) -> Vec<i32> {
     let mut adds: Vec<i32> = vec!();
-    let mut numbers: Vec<i32> = vec!();
 
     for e in &input {
         if *e == 0 {adds.push(8);}
     }
 
-    numbers = input.into_iter().map(|e| {
+    let mut numbers: Vec<i32>  = input.into_iter().map(|e| {
         if e > 0 {e - 1}
         else {6}
     }).collect();
@@ -23,6 +22,24 @@ fn simulate(input: Vec<i32>) -> Vec<i32> {
     numbers
 }
 
+fn simulate_fast(input: Vec<usize>, total_days: usize) -> u64 {
+    let mut counts: Vec<u64> = vec![0; total_days + 9];
+    for e in &input {
+        counts[*e] += 1;
+    }
+
+    let mut count = input.len() as u64;
+
+    for i in 0..total_days {
+        let new_fish = counts[i];
+        counts[i + 6+1] += new_fish;
+        counts[i + 8 + 1] += new_fish;
+        count += new_fish;
+    }
+    count
+}
+
+#[allow(dead_code)]
 pub fn part1() {
     let mut days = parse_inputs();
     
@@ -31,4 +48,10 @@ pub fn part1() {
     }
 
     println!("result : {}", days.len());
+}
+
+pub fn part2() {
+    let days = parse_inputs();
+
+    println!("result : {}", simulate_fast(days.into_iter().map(|d| d as usize).collect(), 256));
 }

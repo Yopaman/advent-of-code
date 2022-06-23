@@ -1,6 +1,4 @@
 use crate::inputs;
-use std::cmp::min;
-use std::cmp::max;
 use itertools::Itertools;
 
 struct Line {
