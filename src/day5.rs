@@ -38,7 +38,7 @@ fn parse_inputs() -> Vec<Line> {
     }).collect()
 }
 
-fn get_all_points(lines: Vec<Line>) -> Vec<(i32, i32)> {
+fn get_all_points(lines: Vec<Line>, diag: bool) -> Vec<(i32, i32)> {
     let mut points_vec: Vec<(i32, i32)> = vec!();
     lines.iter().for_each(|l| {
         if l.is_horizontal() {
@@ -55,7 +55,7 @@ fn get_all_points(lines: Vec<Line>) -> Vec<(i32, i32)> {
                 l.y2 ..= l.y1
             };
             range.for_each(|y| points_vec.push((l.x1, y)));
-        } else if l.is_diagonal() {
+        } else if l.is_diagonal() && diag {
             if l.x1 <= l.x2 && l.y1 <= l.y2 {
                 let mut x = l.x1;
                 let mut y = l.y1;
@@ -95,9 +95,19 @@ fn get_all_points(lines: Vec<Line>) -> Vec<(i32, i32)> {
     points_vec
 }
 
+#[allow(dead_code)]
 pub fn part1() {
     let lines = parse_inputs();
-    let mut points = get_all_points(lines);
+    let mut points = get_all_points(lines, false);
+    points.sort();
+    let count = points.into_iter().dedup_with_count().fold(0, |acc, p| if p.0 > 1 { acc + 1 } else { acc });
+    println!("result : {}", count);
+}
+
+#[allow(dead_code)]
+pub fn part2() {
+    let lines = parse_inputs();
+    let mut points = get_all_points(lines, true);
     points.sort();
     let count = points.into_iter().dedup_with_count().fold(0, |acc, p| if p.0 > 1 { acc + 1 } else { acc });
     println!("result : {}", count);
