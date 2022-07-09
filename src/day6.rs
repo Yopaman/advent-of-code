@@ -39,7 +39,7 @@ fn simulate_fast(input: Vec<usize>, total_days: usize) -> u64 {
     count
 }
 
-#[allow(dead_code)]
+
 pub fn part1() {
     let mut days = parse_inputs();
     

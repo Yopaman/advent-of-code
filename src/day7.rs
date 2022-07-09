@@ -3,13 +3,13 @@ use std::cmp::Ordering;
 use std::cmp::max;
 use std::cmp::min;
 
-#[allow(dead_code)]
+
 fn parse_inputs() -> Vec<i32> {
     let lines = inputs::read_lines("./src/inputs/day7.txt");
     lines[0].split(",").into_iter().map(|e| e.parse::<i32>().unwrap()).collect()   
 }
 
-#[allow(dead_code)]
+
 fn partition(data: &[i32]) -> Option<(Vec<i32>, i32, Vec<i32>)> {
     match data.len() {
         0 => None,
@@ -34,7 +34,7 @@ fn partition(data: &[i32]) -> Option<(Vec<i32>, i32, Vec<i32>)> {
     }
 }
 
-#[allow(dead_code)]
+
 fn select(data: &[i32], k: usize) -> Option<i32> {
     let part = partition(data);
 
@@ -52,7 +52,7 @@ fn select(data: &[i32], k: usize) -> Option<i32> {
     }
 }
 
-#[allow(dead_code)]
+
 fn median(data: &[i32]) -> Option<f32> {
     let size = data.len();
 
@@ -70,7 +70,7 @@ fn median(data: &[i32]) -> Option<f32> {
     }
 }
 
-#[allow(dead_code)]
+
 pub fn part1() {
     let coords = parse_inputs();
     let best_y = median(&coords).unwrap();
@@ -98,6 +98,7 @@ fn std_derivation(numbers: &Vec<i32>) -> f32 {
     variance.sqrt()
 }
 
+// Need optimization, really slow
 pub fn part2() {
     let coords = parse_inputs();
 

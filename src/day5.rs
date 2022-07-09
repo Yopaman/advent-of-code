@@ -93,7 +93,7 @@ fn get_all_points(lines: Vec<Line>, diag: bool) -> Vec<(i32, i32)> {
     points_vec
 }
 
-#[allow(dead_code)]
+
 pub fn part1() {
     let lines = parse_inputs();
     let mut points = get_all_points(lines, false);
@@ -102,7 +102,7 @@ pub fn part1() {
     println!("result : {}", count);
 }
 
-#[allow(dead_code)]
+
 pub fn part2() {
     let lines = parse_inputs();
     let mut points = get_all_points(lines, true);
