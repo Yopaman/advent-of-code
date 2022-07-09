@@ -1,6 +1,6 @@
 use crate::inputs;
 
-#[allow(dead_code)]
+
 pub fn part1() {
     let lines = inputs::read_lines("./src/inputs/day1.txt");
     let mut sum: u32 = 0;
@@ -14,7 +14,7 @@ pub fn part1() {
 
 }
 
-#[allow(dead_code)]
+
 pub fn part2() {
     let lines = inputs::read_lines("./src/inputs/day1.txt");
     let mut sum: u32 = 0;
