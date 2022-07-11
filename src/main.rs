@@ -7,8 +7,9 @@ mod day4;
 mod day5;
 mod day6;
 mod day7;
+mod day8;
 mod inputs;
 
 fn main() {
-    day7::part2()
+    day8::part1();
 }
