@@ -1,2 +1,3 @@
 /target
 /src/inputs/*.txt
+Cargo.lock
