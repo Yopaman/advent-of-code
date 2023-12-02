@@ -69,23 +69,27 @@ impl Game {
     }
 }
 
+fn parse(input: String) -> Vec<Game> {
+    let lines = input.split('\n');
+    lines
+        .map(|l| {
+            if !l.is_empty() {
+                Game::new(l.to_string())
+            } else {
+                Game {
+                    id: 0,
+                    max_red: 0,
+                    max_blue: 0,
+                    max_green: 0,
+                }
+            }
+        })
+        .collect::<Vec<Game>>()
+}
+
 impl Problem for DayTwo {
     fn part_one(&self, input: String) {
-        let lines = input.split('\n');
-        let games: Vec<Game> = lines
-            .map(|l| {
-                if !l.is_empty() {
-                    Game::new(l.to_string())
-                } else {
-                    Game {
-                        id: 0,
-                        max_red: 0,
-                        max_blue: 0,
-                        max_green: 0,
-                    }
-                }
-            })
-            .collect::<Vec<Game>>();
+        let games = parse(input);
         let mut sum = 0;
         for game in games {
             if game.max_red <= 12 && game.max_green <= 13 && game.max_blue <= 14 {
@@ -96,6 +100,11 @@ impl Problem for DayTwo {
     }
 
     fn part_two(&self, input: String) {
-        todo!()
+        let games = parse(input);
+        let mut powers: u32 = 0;
+        for game in games {
+            powers += (game.max_green * game.max_red * game.max_blue) as u32;
+        }
+        println!("{}", powers);
     }
 }

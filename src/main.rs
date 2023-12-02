@@ -1,3 +1,4 @@
+use std::time::Instant;
 use std::{fs::File, io::Write};
 
 use clap::{Parser, Subcommand};
@@ -57,8 +58,26 @@ fn main() {
             let problem: &dyn Problem = boxed_problem.as_ref();
             let input: String = get_input(day);
             match str::parse(part).unwrap() {
-                1 => problem.part_one(input),
-                2 => problem.part_two(input),
+                1 => {
+                    if *benchmark {
+                        let start = Instant::now();
+                        problem.part_one(input);
+                        let duration = start.elapsed();
+                        println!("Time elapsed : {:?}", duration);
+                    } else {
+                        problem.part_one(input);
+                    }
+                }
+                2 => {
+                    if *benchmark {
+                        let start = Instant::now();
+                        problem.part_two(input);
+                        let duration = start.elapsed();
+                        println!("Time elapsed : {:?}", duration);
+                    } else {
+                        problem.part_two(input);
+                    }
+                }
                 _ => println!("error"),
             };
         }
