@@ -6,6 +6,14 @@ use inputs::get_input;
 
 use crate::days::day01::DayOne;
 use crate::days::day02::DayTwo;
+use crate::days::day03::DayThree;
+use crate::days::day04::DayFour;
+use crate::days::day05::DayFive;
+use crate::days::day06::DaySix;
+use crate::days::day07::DaySeven;
+use crate::days::day08::DayEight;
+use crate::days::day09::DayNine;
+use crate::days::day10::DayTen;
 use crate::problem::Problem;
 
 mod days;
@@ -38,9 +46,14 @@ fn day_to_problem(day: usize) -> Option<Box<dyn Problem>> {
     match day {
         1 => Some(Box::new(DayOne {})),
         2 => Some(Box::new(DayTwo {})),
-        //3 => Some(Box::new(DayThree {})),
-        //4 => Some(Box::new(DayFour {})),
-        //5 => Some(Box::new(DayFive {})),
+        3 => Some(Box::new(DayThree {})),
+        4 => Some(Box::new(DayFour {})),
+        5 => Some(Box::new(DayFive {})),
+        6 => Some(Box::new(DaySix {})),
+        7 => Some(Box::new(DaySeven {})),
+        8 => Some(Box::new(DayEight {})),
+        9 => Some(Box::new(DayNine {})),
+        10 => Some(Box::new(DayTen {})),
         _ => None,
     }
 }
@@ -56,7 +69,7 @@ fn main() {
         }) => {
             let boxed_problem: Box<dyn Problem> = day_to_problem(str::parse(day).unwrap()).unwrap();
             let problem: &dyn Problem = boxed_problem.as_ref();
-            let input: String = get_input(day);
+            let input: String = get_input(day).expect("Input does not exist.");
             match str::parse(part).unwrap() {
                 1 => {
                     if *benchmark {
@@ -82,7 +95,7 @@ fn main() {
             };
         }
         Some(Commands::Get { day }) => {
-            let input = inputs::get_input(day);
+            let input = inputs::get_input_from_website(day);
             let file_path = format!("inputs/day{}.txt", day);
             let mut file = File::create(&file_path).expect("Error creating the file !");
             file.write_all(input.as_bytes())
