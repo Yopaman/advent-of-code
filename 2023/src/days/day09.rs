@@ -27,7 +27,3 @@ impl Problem for DayNine {
         println!("{:?}", numbers.into_iter().sum::<i64>()); 
     }
 }
-
-fn test(line: Vec<isize>) -> Vec<isize> {
-    line.iter().zip(line.iter().skip(1)).map(|(a, b)| b - a).collect::<Vec<isize>>()
-}
