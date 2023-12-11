@@ -1,4 +1,7 @@
-use std::{cmp::{self, Ordering}, collections::HashMap};
+use std::{
+    cmp::{self, Ordering},
+    collections::HashMap,
+};
 
 use crate::problem::Problem;
 
@@ -33,15 +36,46 @@ fn get_hand(hand: String, value: usize, part2: bool) -> Hand {
     common_letters.resize(5, 0);
     common_letters[0] += jockers_to_add;
     match common_letters[..] {
-        [5,0,0,0,0] => Hand {h_type: 6, cards: hand, value},
-        [4,1,0,0,0] => Hand {h_type: 5, cards: hand, value},
-        [3,2,0,0,0] => Hand {h_type: 4, cards: hand, value},
-        [3,1,1,0,0] => Hand {h_type: 3, cards: hand, value},
-        [2,2,1,0,0] => Hand {h_type: 2, cards: hand, value},
-        [2,1,1,1,0] => Hand {h_type: 1, cards: hand, value},
-        [1,1,1,1,1] => Hand {h_type: 0, cards: hand, value},
-        _ => Hand {h_type: 0, cards: hand, value},
-
+        [5, 0, 0, 0, 0] => Hand {
+            h_type: 6,
+            cards: hand,
+            value,
+        },
+        [4, 1, 0, 0, 0] => Hand {
+            h_type: 5,
+            cards: hand,
+            value,
+        },
+        [3, 2, 0, 0, 0] => Hand {
+            h_type: 4,
+            cards: hand,
+            value,
+        },
+        [3, 1, 1, 0, 0] => Hand {
+            h_type: 3,
+            cards: hand,
+            value,
+        },
+        [2, 2, 1, 0, 0] => Hand {
+            h_type: 2,
+            cards: hand,
+            value,
+        },
+        [2, 1, 1, 1, 0] => Hand {
+            h_type: 1,
+            cards: hand,
+            value,
+        },
+        [1, 1, 1, 1, 1] => Hand {
+            h_type: 0,
+            cards: hand,
+            value,
+        },
+        _ => Hand {
+            h_type: 0,
+            cards: hand,
+            value,
+        },
     }
 }
 
@@ -65,7 +99,11 @@ fn compare_hands(hand_a: Hand, hand_b: Hand, part2: bool) -> cmp::Ordering {
             }
             return Ordering::Less;
         } else if card_a.is_numeric() && card_b.is_numeric() {
-            return card_a.to_digit(10).unwrap().partial_cmp(&card_b.to_digit(10).unwrap()).unwrap();
+            return card_a
+                .to_digit(10)
+                .unwrap()
+                .partial_cmp(&card_b.to_digit(10).unwrap())
+                .unwrap();
         } else if !card_a.is_numeric() && card_b.is_numeric() {
             if part2 && card_a == 'J' {
                 return Ordering::Less;
@@ -75,20 +113,56 @@ fn compare_hands(hand_a: Hand, hand_b: Hand, part2: bool) -> cmp::Ordering {
                 return match card_a {
                     'J' => Ordering::Less,
                     'A' => Ordering::Greater,
-                    'K' => if card_b == 'A' {Ordering::Less} else {Ordering::Greater},
-                    'Q' => if ['A','K'].contains(&card_b) {Ordering::Less} else {Ordering::Greater},
-                    'T' => if card_b == 'J' {Ordering::Greater} else {Ordering::Less},
+                    'K' => {
+                        if card_b == 'A' {
+                            Ordering::Less
+                        } else {
+                            Ordering::Greater
+                        }
+                    }
+                    'Q' => {
+                        if ['A', 'K'].contains(&card_b) {
+                            Ordering::Less
+                        } else {
+                            Ordering::Greater
+                        }
+                    }
+                    'T' => {
+                        if card_b == 'J' {
+                            Ordering::Greater
+                        } else {
+                            Ordering::Less
+                        }
+                    }
                     _ => Ordering::Less,
-                }
+                };
             }
             return match card_a {
                 'A' => Ordering::Greater,
-                'K' => if card_b == 'A' {Ordering::Less} else {Ordering::Greater},
-                'Q' => if ['A','K'].contains(&card_b) {Ordering::Less} else {Ordering::Greater},
-                'J' => if ['A','K','Q'].contains(&card_b) {Ordering::Less} else {Ordering::Greater},
+                'K' => {
+                    if card_b == 'A' {
+                        Ordering::Less
+                    } else {
+                        Ordering::Greater
+                    }
+                }
+                'Q' => {
+                    if ['A', 'K'].contains(&card_b) {
+                        Ordering::Less
+                    } else {
+                        Ordering::Greater
+                    }
+                }
+                'J' => {
+                    if ['A', 'K', 'Q'].contains(&card_b) {
+                        Ordering::Less
+                    } else {
+                        Ordering::Greater
+                    }
+                }
                 'T' => Ordering::Less,
                 _ => Ordering::Less,
-            }
+            };
         }
         Ordering::Equal
     }
@@ -104,10 +178,10 @@ impl Problem for DaySeven {
             let value = split.next().unwrap().parse::<usize>().unwrap();
             hands.push(get_hand(hand.to_string(), value, false));
         }
-        hands.sort_by(|a, b| compare_hands(a.clone(), b.clone(), false)); 
+        hands.sort_by(|a, b| compare_hands(a.clone(), b.clone(), false));
         let mut sum = 0;
         for (i, hand) in hands.iter().enumerate() {
-            sum += hand.value * (i+1);
+            sum += hand.value * (i + 1);
         }
         println!("{:?}", sum);
     }
@@ -121,10 +195,10 @@ impl Problem for DaySeven {
             let value = split.next().unwrap().parse::<usize>().unwrap();
             hands.push(get_hand(hand.to_string(), value, true));
         }
-        hands.sort_by(|a, b| compare_hands(a.clone(), b.clone(), true)); 
+        hands.sort_by(|a, b| compare_hands(a.clone(), b.clone(), true));
         let mut sum = 0;
         for (i, hand) in hands.iter().enumerate() {
-            sum += hand.value * (i+1);
+            sum += hand.value * (i + 1);
         }
         println!("{:?}", sum);
     }
@@ -134,5 +208,12 @@ impl Problem for DaySeven {
 fn test_get_hand_type() {
     let hand = String::from("JJJJJ");
     let got = get_hand(hand, 5, true);
-    assert_eq!(got, Hand{h_type: 6, cards:String::from("JJJJJ"), value: 5});
+    assert_eq!(
+        got,
+        Hand {
+            h_type: 6,
+            cards: String::from("JJJJJ"),
+            value: 5
+        }
+    );
 }

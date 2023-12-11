@@ -14,6 +14,7 @@ use crate::days::day07::DaySeven;
 use crate::days::day08::DayEight;
 use crate::days::day09::DayNine;
 use crate::days::day10::DayTen;
+use crate::days::day11::DayEleven;
 use crate::problem::Problem;
 
 mod days;
