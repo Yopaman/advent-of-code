@@ -8,6 +8,11 @@ impl Problem for DayTen {
     }
 
     fn part_two(&self, input: String) {
-        todo!();
+        todo!()
     }
+}
+
+#[test]
+fn test_test() {
+    assert_eq!(1,1);
 }
