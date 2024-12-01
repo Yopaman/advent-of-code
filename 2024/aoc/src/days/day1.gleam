@@ -1,6 +1,9 @@
+import counter
+import gleam/dict
 import gleam/int
 import gleam/io
 import gleam/list
+import gleam/result
 import gleam/string
 import helpers
 
@@ -32,8 +35,21 @@ pub fn part1(input: #(List(Int), List(Int))) -> String {
   |> int.to_string
 }
 
-pub fn part2(_input: #(List(Int), List(Int))) -> String {
-  "todo"
+pub fn part2(input: #(List(Int), List(Int))) -> String {
+  let #(first, second) = input
+  let c = counter.from_list(second)
+  first
+  |> list.map(fn(e) {
+    let num_in_s =
+      c
+      |> counter.most_common
+      |> dict.from_list
+      |> dict.get(e)
+      |> result.unwrap(0)
+    e * num_in_s
+  })
+  |> int.sum
+  |> int.to_string
 }
 
 pub fn main() {
