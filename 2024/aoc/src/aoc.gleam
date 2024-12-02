@@ -1,5 +1,6 @@
 import argv
 import days/day1
+import days/day2
 import dotenv_gleam
 import envoy
 import gleam/hackney
@@ -23,6 +24,9 @@ pub fn main() {
       case day {
         "1" -> {
           day1.main()
+        }
+        "2" -> {
+          day2.main()
         }
         _ -> io.println("Unknown day!")
       }
