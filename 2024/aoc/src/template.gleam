@@ -17,5 +17,5 @@ pub fn part2(_input: String) -> String {
 pub fn main() {
   let input = parse()
   io.println("Part 1 : " <> part1(input))
-  io.println("Part 2 : " <> part1(input))
+  io.println("Part 2 : " <> part2(input))
 }

@@ -79,9 +79,7 @@ pub fn part2_loop(
     [Mul(n1, n2), ..tail] if enabled -> part2_loop(tail, True, result + n1 * n2)
     [Mul(_, _), ..tail] if !enabled -> part2_loop(tail, False, result)
     [] -> result |> int.to_string
-    [_] -> panic as "not possible ??"
-    [Mul(_, _), _] -> panic as "not possible ??"
-    [_, _, _, ..] -> panic as "not possible ??"
+    _ -> panic as "not possible ??"
   }
 }
 

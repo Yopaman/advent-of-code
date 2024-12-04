@@ -2,6 +2,7 @@ import argv
 import days/day1
 import days/day2
 import days/day3
+import days/day4
 import dotenv_gleam
 import envoy
 import gleam/hackney
@@ -31,6 +32,9 @@ pub fn main() {
         }
         "3" -> {
           day3.main()
+        }
+        "4" -> {
+          day4.main()
         }
         _ -> io.println("Unknown day!")
       }
